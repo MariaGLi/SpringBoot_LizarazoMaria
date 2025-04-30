@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adrian.demojpa.application.service.PersonService;
+import com.adrian.demojpa.application.service.ProjectService;
 import com.adrian.demojpa.domain.Person;
+import com.adrian.demojpa.domain.Project;
 import com.adrian.demojpa.domain.Rol;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -19,8 +22,10 @@ public class ApiController {
 
     private final PersonService personService;
 
-    // @Qualifier("personServicePImpl")
-    public ApiController(PersonService personService) {
+    private final ProjectService projectService;
+
+    public ApiController(PersonService personService, ProjectService projectService) {
+        this.projectService = projectService;
         this.personService = personService;
     }
 
@@ -40,6 +45,21 @@ public class ApiController {
         @RequestParam(name = "value", defaultValue = "") String value) {
 
         List<Rol> results = personService.findAllRolesFilter(filter, value);
+
+        return results;
+    }
+
+    @PostMapping
+    public String newRole(){
+        return "";
+    }
+
+    @GetMapping("/projects")
+    public List<Project> findAllProjects(
+        @RequestParam(name = "filter", defaultValue = "") String filter,
+        @RequestParam(name = "value", defaultValue = "") String value) {
+
+        List<Project> results = projectService.findAllProjects();
 
         return results;
     }
