@@ -1,12 +1,15 @@
 package com.adrian.demojpa.infrastructure.repository;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.adrian.demojpa.application.service.PersonService;
 import com.adrian.demojpa.domain.Person;
 import com.adrian.demojpa.domain.Rol;
+import com.adrian.demojpa.infrastructure.controller.Error.RolDuplicateException;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -34,4 +37,19 @@ public class PersonServiceImpl implements PersonService {
         return roleRepository.findAll();
     }
     
+    @Override
+    public Rol createNewRol(String name) {
+        Rol newRol = new Rol();
+        newRol.setName(name);
+
+        if(getRolByName(name).isPresent()){
+            throw new RolDuplicateException("El rol " + name +" ya existe", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return roleRepository.save(newRol);
+    }
+
+    private Optional <Rol> getRolByName (String rolName) {
+        return roleRepository.findByName(rolName);
+    }
 }

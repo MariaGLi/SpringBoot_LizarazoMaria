@@ -9,4 +9,5 @@ import com.adrian.demojpa.domain.Rol;
 public interface PersonService {
     public List<Person> findAllByFilter(String filter, String value);
     public List<Rol> findAllRolesFilter(String filter, String value);
+    public Rol createNewRol(String name);
 }

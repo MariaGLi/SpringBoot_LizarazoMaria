@@ -20,5 +20,4 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> findAllProjects() {
         return projectRepository.findAll();
     }
-
 }
