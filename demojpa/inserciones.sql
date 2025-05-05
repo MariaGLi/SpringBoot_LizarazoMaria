@@ -1,14 +1,15 @@
-CREATE DATABASE jpademo;
 USE jpademo;
-
-insert into personas(programming_language, last_name, full_name, rol_id) values
-("Leal", "Java", "Sandra", 1),
-("Lizarazo", "Python", "María", 2),
-("López", "JavaScript", "Herney", 1);
 
 insert into roles(id, name) values
 (1, "User"),
-(2, "Admin");
+(2, "Admin"),
+(3, "Estudent");
+
+insert into personas(programming_language, last_name, full_name, rol_id) values
+("Java", "Leal", "Sandra", 1),
+("Python", "Lizarazo", "María", 2),
+("SpringBoot", "Guerrero", "Jean Franco", 3),
+("JavaScript", "López", "Herney", 1);
 
 insert into passport(id, person_id, number, expiration) values
 (1, 3, "NUM12345", "2029-10-28");

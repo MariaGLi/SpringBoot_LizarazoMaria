@@ -51,7 +51,7 @@ public class Person {
     @JsonBackReference
     private Rol role;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private Passport passport;
 
