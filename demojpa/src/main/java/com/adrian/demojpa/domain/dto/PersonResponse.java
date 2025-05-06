@@ -1,20 +1,14 @@
 package com.adrian.demojpa.domain.dto;
 
-
-public class PersonRequest {
+public class PersonResponse {
     
-    private String name, surname, skill, passport;
-
-    public PersonRequest() {
-    }
+    private String name, surname, skill;
+    private boolean passport;
     
-    public PersonRequest(String name, String surname, String skill) {
-        this.name = name;
-        this.surname = surname;
-        this.skill = skill;
+    public PersonResponse() {
     }
 
-    public PersonRequest(String name, String surname, String skill, String passport) {
+    public PersonResponse(String name, String surname, String skill, boolean passport) {
         this.name = name;
         this.surname = surname;
         this.skill = skill;
@@ -45,11 +39,11 @@ public class PersonRequest {
         this.skill = skill;
     }
 
-    public String getPassport() {
+    public boolean isPassport() {
         return passport;
     }
 
-    public void setPassport(String passport) {
+    public void setPassport(boolean passport) {
         this.passport = passport;
-    }    
+    }
 }

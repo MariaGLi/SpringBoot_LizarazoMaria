@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.adrian.demojpa.infrastructure.controller.Error.Model.FieldError;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @RestControllerAdvice
 public class GlobalErrorHandler {
 
@@ -28,6 +30,12 @@ public class GlobalErrorHandler {
     public ResponseEntity<?> handleFieldsException(MethodArgumentNotValidException e){
         List<FieldError> fieldErrors = e.getFieldErrors().stream().map( field -> new FieldError(field.getField(), field.getDefaultMessage())).toList();
 
+        return ResponseEntity.badRequest().body(fieldErrors);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<?> handleNotEntityFound(EntityNotFoundException e){
+        FieldError fieldErrors = new FieldError("Entity", e.getMessage());
         return ResponseEntity.badRequest().body(fieldErrors);
     }
 }
